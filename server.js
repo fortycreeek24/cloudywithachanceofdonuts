@@ -2,6 +2,24 @@ const express = require ('express');
 
 const app = express();
 
+//connect to database use mysql.js
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "password",
+  database: 'mcsp02donuts' 
+});
+
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+connection.end();
 
 const port = 3000;
 
@@ -9,8 +27,10 @@ const port = 3000;
 
 app.get('/', (req, res) => {
     res.send('Hello World')
-    });
+});
 
+//use my sqljs to run sql queries to get data
+//res.send that data
 
 //CREATE
 //ADD A NEW DONUT
